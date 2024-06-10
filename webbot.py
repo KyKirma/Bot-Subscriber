@@ -26,7 +26,8 @@ import time
 
 driver.get("https://portalcarreira.propagandistadeprimeira.com.br/auth/login")
 
-# Processo de login no site
+
+# ====== Processo de login no site =========
 checkBoxLogin = driver.find_elements(By.CSS_SELECTOR, 'label.custom-control-label') #Acha as checkboxs do site
 
 recrutadorButton = checkBoxLogin[1] #Seleciona a opção do recrutador
@@ -40,7 +41,35 @@ emailEntry.send_keys(info['login']) #Adiciona ao campo
 passwordEntry = driver.find_element(By.NAME, 'password')
 passwordEntry.send_keys(info['senha'])
 
-loginButton = driver.find_element(By.CSS_SELECTOR, 'button.btn-primary')
+loginButton = driver.find_element(By.CSS_SELECTOR, 'button.btn-primary') #Encontra o botão de login 
 loginButton.click()
+# ==========================================
 
 time.sleep(5)
+
+# === Processo de cadastro de candidatos ===
+candidatoButton = driver.find_element(By.CSS_SELECTOR, "a[href*='/admin/add-user']") #Seleciona o botão de adicionar candidatos
+candidatoButton.click()
+time.sleep(3)
+
+#? Puxaremos os campos de entrada para adicionar as info
+userForm = driver.find_element(By.CSS_SELECTOR, 'form')
+userNameEntry = driver.find_element(By.NAME, 'name')
+userEmailEntry = driver.find_element(By.NAME, 'email')
+userPhoneEntry = driver.find_element(By.NAME, 'celPhone')
+userVitalicCheckbox = driver.find_elements(By.CSS_SELECTOR, 'label.form-check-label')
+userVitalic = userVitalicCheckbox[0]
+userTypeCheckbox = driver.find_elements(By.NAME, 'type')
+userType = userTypeCheckbox[0]
+
+#? adicionaremos nos campos as informações
+userNameEntry.send_keys('João da silva teste')
+userEmailEntry.send_keys('teste@gmail.com')
+userPhoneEntry.send_keys('(34) 9 9999-9999')
+userVitalic.click()
+userType.click()
+time.sleep(10)
+userForm.submit()
+# ==========================================
+
+time.sleep(3)
