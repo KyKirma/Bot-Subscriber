@@ -13,7 +13,7 @@ response = requests.get('https://api2.eduzz.com/subscription/get_contract_list',
 subsList = response.json()
 
 for data in subsList['data']:
-    print(data)
+    #print(data)
     clientName = data['client_name']
     clientEmail = data['client_email']
 

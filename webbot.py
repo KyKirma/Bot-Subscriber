@@ -1,27 +1,20 @@
 # Importando o webdriver
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 
 # Instanciando o Objeto ChromeOptions
-options = webdriver.ChromeOptions()
+options = webdriver.EdgeOptions()
 
 # Passando algumas opções para esse ChromeOptions
 #options.add_argument('--headless')
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--disable-crash-reporter')
-options.add_argument('--log-level=3')
-options.add_argument('--disable-gpu')
 options.add_experimental_option('detach', True)
 
 # Criando o driver "bot"
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+driver = webdriver.Edge(options=options)
 
 # Bibliotecas extras
-from tqdm import tqdm
 import time
 
 driver.get("https://portalcarreira.propagandistadeprimeira.com.br/auth/login")
@@ -60,7 +53,7 @@ userPhoneEntry = driver.find_element(By.NAME, 'celPhone')
 userVitalicCheckbox = driver.find_elements(By.CSS_SELECTOR, 'label.form-check-label')
 userVitalic = userVitalicCheckbox[0]
 userTypeCheckbox = driver.find_elements(By.NAME, 'type')
-userType = userTypeCheckbox[0]
+userType = userTypeCheckbox[1]
 
 #? adicionaremos nos campos as informações
 userNameEntry.send_keys('João da silva teste')
@@ -68,7 +61,7 @@ userEmailEntry.send_keys('teste@gmail.com')
 userPhoneEntry.send_keys('(34) 9 9999-9999')
 userVitalic.click()
 userType.click()
-time.sleep(10)
+time.sleep(5)
 userForm.submit()
 # ==========================================
 
